@@ -1,27 +1,27 @@
 let modInfo = {
-	name: "The ??? Tree",
-	id: "mymod",
-	author: "nobody",
+	name: "The idk Tree",
+	id: "idktree",
+	author: "mdqz1",
 	pointsName: "points",
 	modFiles: ["layers.js", "tree.js"],
 
 	discordName: "",
 	discordLink: "",
-	initialStartPoints: new Decimal (10), // Used for hard resets and new players
+	initialStartPoints: new Decimal (0), // Used for hard resets and new players
 	offlineLimit: 1,  // In hours
 }
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0",
-	name: "Literally nothing",
+	num: "0.0.1",
+	name: "Literally almost nothing",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
 	<h3>v0.0</h3><br>
-		- Added things.<br>
-		- Added stuff.`
-
+		- Added nothing
+	<h3>v0.0.1</h3><br>
+		- Added 4 upgrades`
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
@@ -43,6 +43,9 @@ function getPointGen() {
 		return new Decimal(0)
 
 	let gain = new Decimal(1)
+	if (hasUpgrade('p', 11)) gain = gain.times(2)
+	if (hasUpgrade('p', 12)) gain = gain.times(2)
+	if (hasUpgrade('p', 13)) gain = gain.times(upgradeEffect('p', 13))
 	return gain
 }
 
@@ -51,12 +54,12 @@ function addedPlayerData() { return {
 }}
 
 // Display extra things at the top of the page
-var displayThings = [
+var displayThings = [`Current endgame: 100,000 points`
 ]
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("e280000000"))
+	return player.points.gte(new Decimal("1e5"))
 }
 
 

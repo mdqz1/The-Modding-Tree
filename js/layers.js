@@ -14,7 +14,8 @@ addLayer("p", {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(1)
+        let mult = new Decimal(1)
+        if (hasUpgrade('p', 14)) mult = mult.times(upgradeEffect('p', 14))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -24,5 +25,35 @@ addLayer("p", {
     hotkeys: [
         {key: "p", description: "P: Reset for prestige points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return true}
+    layerShown(){return true},
+    upgrades: {
+        11: {
+            title: "1st upgrade",
+            description: "Double point gain.",
+            cost: new Decimal(1),
+        },
+        12: {
+            title: "2nd upgrade",
+            description: "Double point gain, again.",
+            cost: new Decimal(5),
+        },
+        13: {
+            title: "3rd upgrade",
+            description: "Boost points based on prestige points.",
+            cost: new Decimal(5),
+            effect() {
+                return player[this.layer].points.add(1).pow(0.5)
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+        },
+        14: {
+            title: "4th upgrade",
+            description: "Boost prestige points based on points.",
+            cost: new Decimal(10),
+            effect() {
+                return player.points.add(1).pow(0.15)
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+        },
+    },
 })
