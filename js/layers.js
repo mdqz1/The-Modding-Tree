@@ -36,6 +36,9 @@ addLayer("p", {
             title: "2nd upgrade",
             description: "Double point gain, again.",
             cost: new Decimal(5),
+            unlocked() {
+                if (hasUpgrade('p', 11)) return true
+            },
         },
         13: {
             title: "3rd upgrade",
@@ -45,6 +48,9 @@ addLayer("p", {
                 return player[this.layer].points.add(1).pow(0.5)
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+            unlocked() {
+                if (hasUpgrade('p', 12)) return true
+            }
         },
         14: {
             title: "4th upgrade",
@@ -54,6 +60,9 @@ addLayer("p", {
                 return player.points.add(1).pow(0.15)
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+            unlocked() {
+                if (hasUpgrade('p', 13)) return true
+            }
         },
     },
 })
