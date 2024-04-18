@@ -23,10 +23,11 @@ let changelog = `<h1>Changelog:</h1><br>
 		<br>
 	<h3>v0.0.1</h3><br>
 		- Added 4 upgrades<br>
-		- Endgame: 1e5 points
+		- Endgame: 1e5 points<br>
 		<br>
 	<h3>v0.0.1.1</h3><br>
-		- Minor change
+		- Minor change<br>
+		<br>
 	<h3>v0.0.2</h3><br>
 		- Added 3 upgrades<br>
 		- Endgame: 1e7 points`
