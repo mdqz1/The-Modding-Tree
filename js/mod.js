@@ -13,8 +13,8 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0.1.1",
-	name: "Literally almost nothing",
+	num: "0.0.2",
+	name: "Not nothing",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
@@ -26,7 +26,10 @@ let changelog = `<h1>Changelog:</h1><br>
 		- Endgame: 1e5 points
 		<br>
 	<h3>v0.0.1.1</h3><br>
-		- Minor change`
+		- Minor change
+	<h3>v0.0.2</h3><br>
+		Added 3 upgrades<br>
+		- Endgame: 1e7 points`
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
@@ -51,6 +54,7 @@ function getPointGen() {
 	if (hasUpgrade('p', 11)) gain = gain.times(2)
 	if (hasUpgrade('p', 12)) gain = gain.times(2)
 	if (hasUpgrade('p', 13)) gain = gain.times(upgradeEffect('p', 13))
+	if (hasUpgrade('p', 21)) gain = gain.times(upgradeEffect('p', 21))
 	return gain
 }
 
@@ -59,12 +63,12 @@ function addedPlayerData() { return {
 }}
 
 // Display extra things at the top of the page
-var displayThings = [`Current endgame: 100,000 points`
+var displayThings = [`Current endgame: 10,000,000 points`
 ]
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("1e5"))
+	return player.points.gte(new Decimal("1e7"))
 }
 
 

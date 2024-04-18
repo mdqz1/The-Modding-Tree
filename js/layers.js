@@ -16,6 +16,7 @@ addLayer("p", {
     gainMult() { // Calculate the multiplier for main currency from bonuses
         let mult = new Decimal(1)
         if (hasUpgrade('p', 14)) mult = mult.times(upgradeEffect('p', 14))
+        if (hasUpgrade('p', 23)) mult = mult.times(5)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -35,7 +36,7 @@ addLayer("p", {
         12: {
             title: "2nd upgrade",
             description: "Double point gain, again.",
-            cost: new Decimal(5),
+            cost: new Decimal(3),
             unlocked() {
                 if (hasUpgrade('p', 11)) return true
             },
@@ -63,6 +64,38 @@ addLayer("p", {
             unlocked() {
                 if (hasUpgrade('p', 13)) return true
             }
+        },
+        21: {
+            title: "5th upgrade",
+            description: "Point gain boosts itself.",
+            cost: new Decimal(25),
+            effect() {
+                return player.points.add(1).pow(0.15)
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+            unlocked() {
+                if (hasUpgrade('p', 14)) return true
+            },
+        },
+        22: {
+            title: "6th upgrade",
+            description: "Prestige point gain boosts itself.",
+            cost: new Decimal(100),
+            effect() {
+                return player[this.layer].points.add(1).pow(0.15)
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+            unlocked() {
+                if (hasUpgrade('p', 21)) return true
+            },
+        },
+        23: {
+            title: "7th upgrade",
+            description: "Quintuple prestige point gain.",
+            cost: new Decimal(200),
+            unlocked() {
+                if (hasUpgrade('p', 22)) return true
+            },
         },
     },
 })
