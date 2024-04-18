@@ -97,5 +97,13 @@ addLayer("p", {
                 if (hasUpgrade('p', 22)) return true
             },
         },
+        24: {
+            title: "8th upgrade",
+            description: "Unlock a buyable.",
+            cost: new Decimal(1500),
+            unlocked() {
+                if (hasUpgrade('p', 23)) return true
+            },
+        },
     },
 })
